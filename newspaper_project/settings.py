@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #local 
+    'articles.apps.ArticlesConfig',
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
     #3rd party
     "crispy_forms", # new
     "crispy_bootstrap5",
 ]
+TIME_ZONE = "Africa/Maputo"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,6 +133,9 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+## email 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" # new
 DEFAULT_FROM_EMAIL = "Elliotsalem3@gmail.com"
 EMAIL_HOST = "smtp.sendgrid.net"
