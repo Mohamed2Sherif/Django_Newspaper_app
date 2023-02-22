@@ -1,21 +1,36 @@
 {% extends "base.html" %}
-{%block title%}Articles{%endblock title%}
-
-{%block content%}
-{%for object in article_list%}
+{% block title %}Articles{% endblock title %}
+{% block content %}
+{% for article in article_list %}
 <div class="card">
-    <div class="card-header">
-    <span class="font-weight-bold">{{ object.title }}</span> &middot;
-    <span class="text-muted">by {{ object.author }} |
-    {{ object.date }}</span>
-    </div>
-    <div class="card-body">
-    {{ object.body }}
-    </div>
-    <div class="card-footer text-center text-muted">
-    <a href="{%url 'article_edit' object.pk%}">Edit</a> | <a href="{%url 'article_delete' object.pk%}">Delete</a>
-    </div>
+<div class="card-header">
+<span class="font-weight-bold"><a href="{%url 'article_detail' article.pk%}">{{ article.title }}</a></span> &middot;
+<span class="text-muted">by {{ article.author }} |
+{{ article.date }}</span>
+</div>
+<div class="card-body">
+<!-- Changes start here! -->
+<p>{{ article.body }}</p>
+<a href="{% url 'article_edit' article.pk %}">Edit</a> |
+<a href="{% url 'article_delete' article.pk %}">Delete</a>
+</div>
+<div class="card-footer">
+    {% for comment in article.comments.all %}
+<p>
+<span class="font-weight-bold">
+{{ comment.author }} &middot;
+</span>
+{{ comment }}
+</p>
+{% endfor %}
+</div>
+<!-- Changes end here! -->
 </div>
 <br />
-{%endfor%}
-{%endblock content%}
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+{% endfor %}
+{% endblock content %}

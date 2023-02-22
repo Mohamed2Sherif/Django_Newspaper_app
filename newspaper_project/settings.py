@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
+from pathlib import Path
+from environs import Env
 
 import os
-
+env = Env()
+env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +28,7 @@ SECRET_KEY = 'x9f473#ty^amv=)6%m0e=wi%jx0=0mjfbcp7a!lujqw!-!bt0!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -129,7 +132,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.CustomUser' # new
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'article_list'
 LOGOUT_REDIRECT_URL = 'home'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = "bootstrap5"
